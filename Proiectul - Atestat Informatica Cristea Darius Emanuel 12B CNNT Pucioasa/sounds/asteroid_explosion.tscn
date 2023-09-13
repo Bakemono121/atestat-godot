@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsbovqr1sccaw"]
+
+[ext_resource type="AudioStream" uid="uid://3r5ribld2eo4" path="res://sounds/asteroid explosion.wav" id="1_77nog"]
+[ext_resource type="Script" path="res://Scripts/sound_effect.gd" id="2_8uhra"]
+
+[node name="Asteroid Explosion" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_77nog")
+autoplay = true
+bus = &"Effects"
+script = ExtResource("2_8uhra")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

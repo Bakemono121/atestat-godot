@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj3yuby05rxsb"]
+
+[ext_resource type="AudioStream" uid="uid://bg6f1spebatjo" path="res://sounds/healing.wav" id="1_l8t6u"]
+[ext_resource type="Script" path="res://Scripts/sound_effect.gd" id="2_2j1rw"]
+
+[node name="healing sound" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_l8t6u")
+autoplay = true
+bus = &"Effects"
+script = ExtResource("2_2j1rw")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

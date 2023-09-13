@@ -1,0 +1,9 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://3e5obaeqsv5m"]
+
+[ext_resource type="FontFile" uid="uid://c6saie2nbrydh" path="res://Misc/PressStart2P.ttf" id="1_6m6qf"]
+
+[resource]
+base_font = ExtResource("1_6m6qf")
+opentype_features = {
+1667329140: 0
+}

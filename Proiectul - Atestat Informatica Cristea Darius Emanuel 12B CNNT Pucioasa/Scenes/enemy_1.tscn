@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://cl24ysdvr64ke"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_1.gd" id="1_sweb7"]
+[ext_resource type="Texture2D" uid="uid://dstctva11e1rw" path="res://Assets/enemy1.png" id="2_ak721"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8jypi"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_he2v0"]
+radius = 15.0
+
+[node name="Enemy1" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_sweb7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_ak721")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8jypi")
+disabled = true
+
+[node name="BulletHurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletHurtbox"]
+shape = SubResource("CircleShape2D_he2v0")
+
+[node name="PlayerHurtbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+shape = SubResource("CircleShape2D_he2v0")
+
+[node name="Shooting Timer" type="Timer" parent="."]
+
+[node name="Gun Position" type="Marker2D" parent="."]
+position = Vector2(-16, 8)
+
+[connection signal="area_entered" from="BulletHurtbox" to="." method="_on_bullet_hurtbox_area_entered"]
+[connection signal="area_entered" from="PlayerHurtbox" to="." method="_on_player_hurtbox_area_entered"]
+[connection signal="timeout" from="Shooting Timer" to="." method="_on_shooting_timer_timeout"]

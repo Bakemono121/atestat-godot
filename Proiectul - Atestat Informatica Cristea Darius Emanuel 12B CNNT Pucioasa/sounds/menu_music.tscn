@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://2u6d14sfnj7"]
+
+[ext_resource type="AudioStream" uid="uid://dplvaw8o8njp4" path="res://sounds/menu music.mp3" id="1_3qyu7"]
+[ext_resource type="Script" path="res://Scripts/Music.gd" id="2_iwhl6"]
+
+[node name="Menu Music" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_3qyu7")
+pitch_scale = 0.5
+autoplay = true
+bus = &"Music"
+script = ExtResource("2_iwhl6")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

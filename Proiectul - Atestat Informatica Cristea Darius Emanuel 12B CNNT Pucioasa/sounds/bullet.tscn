@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dn33u3u5jxcx6"]
+
+[ext_resource type="AudioStream" uid="uid://cx1a7elg0soe6" path="res://sounds/bullet.wav" id="1_64r7c"]
+[ext_resource type="Script" path="res://Scripts/sound_effect.gd" id="2_spm2a"]
+
+[node name="bullet" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_64r7c")
+autoplay = true
+bus = &"Effects"
+script = ExtResource("2_spm2a")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

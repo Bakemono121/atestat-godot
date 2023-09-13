@@ -1,0 +1,194 @@
+[gd_scene load_steps=4 format=3 uid="uid://c24l8tln4gw5f"]
+
+[ext_resource type="Script" path="res://Scripts/Settings.gd" id="1_idbmt"]
+[ext_resource type="Texture2D" uid="uid://m6lqtes63npd" path="res://Assets/bullet.png" id="2_poova"]
+[ext_resource type="PackedScene" uid="uid://lpks6u5yssay" path="res://Scenes/arrow.tscn" id="3_ojx5f"]
+
+[node name="Settings" type="Control"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 584.0
+offset_bottom = 320.0
+script = ExtResource("1_idbmt")
+
+[node name="Buttons" type="Node2D" parent="."]
+
+[node name="Game" type="Button" parent="Buttons"]
+offset_left = -16.0
+offset_top = 8.0
+offset_right = 104.0
+offset_bottom = 40.0
+text = "Game"
+
+[node name="Audio" type="Button" parent="Buttons"]
+offset_left = 168.0
+offset_top = 8.0
+offset_right = 288.0
+offset_bottom = 40.0
+text = "Audio"
+
+[node name="Back" type="Button" parent="Buttons"]
+offset_left = 392.0
+offset_top = 8.0
+offset_right = 472.0
+offset_bottom = 40.0
+text = "Back"
+
+[node name="Sections" type="Node2D" parent="."]
+
+[node name="Game" type="Control" parent="Sections"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 40.0
+offset_right = 456.0
+offset_bottom = 256.0
+
+[node name="Fullscreen" type="Label" parent="Sections/Game"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 40.0
+offset_right = 152.0
+offset_bottom = 63.0
+text = "Fullscreen"
+
+[node name="Fullscreen Checkbox" type="CheckBox" parent="Sections/Game"]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 24.0
+offset_right = 408.0
+offset_bottom = 48.0
+scale = Vector2(2, 2)
+alignment = 2
+expand_icon = true
+
+[node name="Controller Vibration" type="Label" parent="Sections/Game"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 104.0
+offset_right = 312.0
+offset_bottom = 127.0
+text = "Controller Vibration"
+
+[node name="Controller Vibration Check" type="CheckBox" parent="Sections/Game"]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 88.0
+offset_right = 408.0
+offset_bottom = 112.0
+scale = Vector2(2, 2)
+alignment = 2
+expand_icon = true
+
+[node name="Audio" type="Control" parent="Sections"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 56.0
+offset_right = 448.0
+offset_bottom = 272.0
+
+[node name="Master Sound Slider" type="HSlider" parent="Sections/Audio"]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 16.0
+offset_right = 360.0
+offset_bottom = 48.0
+value = 100.0
+
+[node name="Master Volume" type="Label" parent="Sections/Audio"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 16.0
+offset_right = 88.0
+offset_bottom = 48.0
+text = "Master"
+vertical_alignment = 1
+
+[node name="Master Volume Value" type="SpinBox" parent="Sections/Audio"]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 16.0
+offset_right = 472.0
+offset_bottom = 48.0
+value = 100.0
+suffix = "%"
+
+[node name="Music Sound Slider" type="HSlider" parent="Sections/Audio"]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 80.0
+offset_right = 360.0
+offset_bottom = 112.0
+value = 100.0
+
+[node name="Music Volume" type="Label" parent="Sections/Audio"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 80.0
+offset_right = 72.0
+offset_bottom = 112.0
+text = "Music"
+vertical_alignment = 1
+
+[node name="Music Volume Value" type="SpinBox" parent="Sections/Audio"]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 80.0
+offset_right = 472.0
+offset_bottom = 112.0
+value = 100.0
+suffix = "%"
+
+[node name="Effects Sound Slider" type="HSlider" parent="Sections/Audio"]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 144.0
+offset_right = 360.0
+offset_bottom = 176.0
+value = 100.0
+
+[node name="Effects  Volume" type="Label" parent="Sections/Audio"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 144.0
+offset_right = 110.0
+offset_bottom = 176.0
+text = "Effects"
+vertical_alignment = 1
+
+[node name="Effects Volume Value" type="SpinBox" parent="Sections/Audio"]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 144.0
+offset_right = 472.0
+offset_bottom = 176.0
+value = 100.0
+suffix = "%"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.568627, 0.454902, 0.121569)
+z_index = -2
+position = Vector2(228, 128)
+scale = Vector2(126, 256)
+texture = ExtResource("2_poova")
+metadata/_edit_lock_ = true
+
+[node name="Arrow" parent="." instance=ExtResource("3_ojx5f")]
+position = Vector2(112, 8)
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="Buttons/Game" to="." method="_on_game_pressed"]
+[connection signal="pressed" from="Buttons/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="Buttons/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Sections/Game/Fullscreen Checkbox" to="." method="_on_fullscreen_checkbox_pressed"]
+[connection signal="pressed" from="Sections/Game/Controller Vibration Check" to="." method="_on_controller_vibration_check_pressed"]
+[connection signal="value_changed" from="Sections/Audio/Master Sound Slider" to="." method="_on_master_sound_slider_value_changed"]
+[connection signal="value_changed" from="Sections/Audio/Master Volume Value" to="." method="_on_master_volume_value_value_changed"]
+[connection signal="value_changed" from="Sections/Audio/Music Sound Slider" to="." method="_on_music_sound_slider_value_changed"]
+[connection signal="value_changed" from="Sections/Audio/Music Volume Value" to="." method="_on_music_volume_value_value_changed"]
+[connection signal="value_changed" from="Sections/Audio/Effects Sound Slider" to="." method="_on_effects_sound_slider_value_changed"]
+[connection signal="value_changed" from="Sections/Audio/Effects Volume Value" to="." method="_on_effects_volume_value_value_changed"]

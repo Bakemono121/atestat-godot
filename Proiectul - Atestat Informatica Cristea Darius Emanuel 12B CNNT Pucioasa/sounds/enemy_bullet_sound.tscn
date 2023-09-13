@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsyajvimhtso2"]
+
+[ext_resource type="AudioStream" uid="uid://cx6dori1gvle3" path="res://sounds/enemy_bullet_sound.wav" id="1_r1ip8"]
+[ext_resource type="Script" path="res://Scripts/sound_effect.gd" id="2_ci0sw"]
+
+[node name="Enemy bullet sound" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_r1ip8")
+autoplay = true
+bus = &"Effects"
+script = ExtResource("2_ci0sw")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

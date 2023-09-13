@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ntmcwd2gg6oj"]
+
+[ext_resource type="AudioStream" uid="uid://br6jwb3j34mrh" path="res://sounds/death.wav" id="1_cngtk"]
+[ext_resource type="Script" path="res://Scripts/sound_effect.gd" id="2_0uoku"]
+
+[node name="death" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_cngtk")
+autoplay = true
+bus = &"Music"
+script = ExtResource("2_0uoku")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

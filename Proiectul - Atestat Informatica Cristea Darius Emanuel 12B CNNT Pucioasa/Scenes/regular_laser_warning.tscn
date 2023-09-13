@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bypjk4hdwelje"]
+
+[ext_resource type="Script" path="res://Scripts/warning.gd" id="1_rubu2"]
+[ext_resource type="AudioStream" uid="uid://bg01ndbmnww4i" path="res://sounds/warning_sound.wav" id="2_54j43"]
+
+[node name="Regular Laser Warning" type="Node2D"]
+script = ExtResource("1_rubu2")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(0, 2)
+scale = Vector2(1.60714, 0.796877)
+color = Color(0.815686, 0.0627451, 0.12549, 0.235294)
+polygon = PackedVector2Array(-378.312, -2.5098, 0, -2.5098, 0, 2.04294, 0, 2.50981, -378.312, 2.50981)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="Destroy Timer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_54j43")
+autoplay = true
+bus = &"Effects"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Destroy Timer" to="." method="_on_destroy_timer_timeout"]

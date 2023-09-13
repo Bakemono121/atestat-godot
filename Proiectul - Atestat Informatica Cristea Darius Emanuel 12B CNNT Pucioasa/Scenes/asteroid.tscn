@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://7opmt1pkvm7"]
+
+[ext_resource type="Script" path="res://Scripts/asteroid.gd" id="1_38046"]
+[ext_resource type="Texture2D" uid="uid://d0jtcu6m8ouje" path="res://Assets/Asteroid.png" id="1_kwbl2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8jypi"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_he2v0"]
+radius = 15.0
+
+[node name="Asteroid" type="CharacterBody2D"]
+collision_layer = 32
+collision_mask = 6
+script = ExtResource("1_38046")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_kwbl2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8jypi")
+disabled = true
+
+[node name="BulletHurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 260
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletHurtbox"]
+shape = SubResource("CircleShape2D_he2v0")
+
+[node name="PlayerHurtbox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+shape = SubResource("CircleShape2D_he2v0")
+
+[connection signal="area_entered" from="BulletHurtbox" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="PlayerHurtbox" to="." method="_on_player_hurtbox_area_entered"]

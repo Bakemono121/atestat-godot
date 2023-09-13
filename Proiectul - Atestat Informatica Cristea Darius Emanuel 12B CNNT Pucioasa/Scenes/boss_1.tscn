@@ -1,0 +1,110 @@
+[gd_scene load_steps=8 format=3 uid="uid://72pg1xbw0m1s"]
+
+[ext_resource type="Script" path="res://Scripts/Boss1.gd" id="1_hplyu"]
+[ext_resource type="Texture2D" uid="uid://dstctva11e1rw" path="res://Assets/enemy1.png" id="2_3gosu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_npnmk"]
+bg_color = Color(0.501961, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6wnx"]
+bg_color = Color(0.141176, 0.462745, 0.219608, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8jypi"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_he2v0"]
+radius = 15.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l45on"]
+size = Vector2(3, 2)
+
+[node name="Boss1" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_hplyu")
+
+[node name="Health Bar" type="ProgressBar" parent="."]
+offset_left = -24.0
+offset_top = -112.0
+offset_right = 22.0
+offset_bottom = -108.0
+theme_override_styles/background = SubResource("StyleBoxFlat_npnmk")
+theme_override_styles/fill = SubResource("StyleBoxFlat_k6wnx")
+value = 100.0
+show_percentage = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.215686, 0.372549, 1, 1)
+texture_filter = 1
+position = Vector2(0, -32)
+scale = Vector2(4, 4)
+texture = ExtResource("2_3gosu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -32)
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_8jypi")
+disabled = true
+
+[node name="BulletHurtbox" type="Area2D" parent="."]
+position = Vector2(0, -32)
+scale = Vector2(4, 4)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletHurtbox"]
+shape = SubResource("CircleShape2D_he2v0")
+
+[node name="PlayerHurtbox" type="Area2D" parent="."]
+position = Vector2(0, -32)
+scale = Vector2(4, 4)
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+shape = SubResource("CircleShape2D_he2v0")
+
+[node name="Gun Position" type="Marker2D" parent="."]
+position = Vector2(-64, 0)
+
+[node name="Body" type="Area2D" parent="."]
+position = Vector2(0, -32)
+scale = Vector2(4, 4)
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+position = Vector2(-14.5, 9)
+shape = SubResource("RectangleShape2D_l45on")
+disabled = true
+
+[node name="Lasers" type="Node2D" parent="."]
+
+[node name="Shooting Timer" type="Timer" parent="."]
+
+[node name="Movement Timer" type="Timer" parent="."]
+wait_time = 0.65
+one_shot = true
+autostart = true
+
+[node name="Go mid y timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Stop Laser Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Follow player timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="Intent Chooser Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="BulletHurtbox" to="." method="_on_bullet_hurtbox_area_entered"]
+[connection signal="area_entered" from="PlayerHurtbox" to="." method="_on_player_hurtbox_area_entered"]
+[connection signal="body_entered" from="Body" to="." method="_on_body_body_entered"]
+[connection signal="timeout" from="Shooting Timer" to="." method="_on_shooting_timer_timeout"]
+[connection signal="timeout" from="Movement Timer" to="." method="_on_movement_timer_timeout"]
+[connection signal="timeout" from="Go mid y timer" to="." method="_on_go_mid_y_timer_timeout"]
+[connection signal="timeout" from="Stop Laser Timer" to="." method="_on_stop_laser_timer_timeout"]
+[connection signal="timeout" from="Follow player timer" to="." method="_on_follow_player_timer_timeout"]
+[connection signal="timeout" from="Intent Chooser Timer" to="." method="_on_intent_chooser_timer_timeout"]

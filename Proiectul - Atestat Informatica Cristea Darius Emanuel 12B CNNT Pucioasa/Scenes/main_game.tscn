@@ -1,0 +1,401 @@
+[gd_scene load_steps=24 format=3 uid="uid://d2gfki6cj8qix"]
+
+[ext_resource type="Texture2D" uid="uid://d0ds0hd4frgkm" path="res://Assets/Space Background.png" id="1_3xdx2"]
+[ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_4m602"]
+[ext_resource type="PackedScene" uid="uid://m1bjccvb7anu" path="res://Scenes/player.tscn" id="2_53v57"]
+[ext_resource type="Script" path="res://Scripts/Trash Catcher.gd" id="3_alnng"]
+[ext_resource type="Script" path="res://Scripts/Enemy Controller.gd" id="3_wn1dl"]
+[ext_resource type="Script" path="res://Scripts/Hud.gd" id="4_5uvy0"]
+[ext_resource type="Script" path="res://Scripts/Menu.gd" id="6_qq8y5"]
+[ext_resource type="Script" path="res://Scripts/Info.gd" id="6_ux0sm"]
+[ext_resource type="FontVariation" uid="uid://3e5obaeqsv5m" path="res://Misc/PressStart2P.tres" id="7_pkrmg"]
+[ext_resource type="Script" path="res://Scripts/Death Menu.gd" id="7_uxwpj"]
+[ext_resource type="Texture2D" uid="uid://jasiv5o4ldd6" path="res://Assets/ammo.png" id="8_hffn7"]
+[ext_resource type="Texture2D" uid="uid://brpvwv26620l8" path="res://Assets/heart.png" id="8_mfu6q"]
+[ext_resource type="PackedScene" uid="uid://c24l8tln4gw5f" path="res://Scenes/settings.tscn" id="9_eocrs"]
+[ext_resource type="PackedScene" uid="uid://lpks6u5yssay" path="res://Scenes/arrow.tscn" id="9_ntnsa"]
+[ext_resource type="PackedScene" uid="uid://cys6ynyv2wbh3" path="res://sounds/music.tscn" id="13_eqlol"]
+[ext_resource type="Script" path="res://Scripts/Mini Tutorial.gd" id="14_cpwgg"]
+[ext_resource type="Texture2D" uid="uid://ddi4bywttls17" path="res://Assets/white square.png" id="17_iu7ir"]
+[ext_resource type="Script" path="res://Scripts/Upgrades.gd" id="17_ovsay"]
+[ext_resource type="Script" path="res://Scripts/Background.gd" id="18_nin21"]
+[ext_resource type="AudioStream" uid="uid://c3fo3xruh3asl" path="res://sounds/alert.wav" id="18_p2t6m"]
+[ext_resource type="Texture2D" uid="uid://bl0rreww6ddc" path="res://Assets/Planet1.png" id="20_3p0t3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kiiqh"]
+size = Vector2(738, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q7cpb"]
+size = Vector2(10, 426)
+
+[node name="Main Game" type="Node2D"]
+script = ExtResource("1_4m602")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(360, 202.5)
+
+[node name="Player" parent="." instance=ExtResource("2_53v57")]
+position = Vector2(339, 208)
+
+[node name="Invisible Barrier" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 260
+
+[node name="UpWall" type="CollisionShape2D" parent="Invisible Barrier"]
+position = Vector2(359, -4)
+shape = SubResource("RectangleShape2D_kiiqh")
+
+[node name="DownWall" type="CollisionShape2D" parent="Invisible Barrier"]
+position = Vector2(360, 409)
+shape = SubResource("RectangleShape2D_kiiqh")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Invisible Barrier"]
+position = Vector2(-5, 203)
+shape = SubResource("RectangleShape2D_q7cpb")
+
+[node name="RightWall" type="CollisionShape2D" parent="Invisible Barrier"]
+position = Vector2(724, 205)
+shape = SubResource("RectangleShape2D_q7cpb")
+
+[node name="Trash Catcher" type="Area2D" parent="."]
+position = Vector2(824, 0)
+collision_layer = 64
+collision_mask = 44
+script = ExtResource("3_alnng")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Trash Catcher"]
+position = Vector2(-836, -144)
+polygon = PackedVector2Array(-8, 0, 1024, 0, 1024, -16, -24, -24, -24, 712, 1024, 712, 1024, 696, 0, 688, -3.08386, 422.786)
+
+[node name="Enemy Controller" type="Node2D" parent="."]
+script = ExtResource("3_wn1dl")
+
+[node name="Default Position" type="Marker2D" parent="Enemy Controller"]
+position = Vector2(750, 208)
+
+[node name="Target" type="Marker2D" parent="Enemy Controller"]
+position = Vector2(192, 208)
+
+[node name="Spawn_Timer" type="Timer" parent="Enemy Controller"]
+wait_time = 3.0
+autostart = true
+
+[node name="Enemy_List" type="Node2D" parent="Enemy Controller"]
+
+[node name="Obstacles_List" type="Node2D" parent="Enemy Controller"]
+
+[node name="Sounds" type="Node2D" parent="Enemy Controller"]
+process_mode = 3
+
+[node name="Misc" type="Node2D" parent="Enemy Controller"]
+
+[node name="Hud" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("4_5uvy0")
+
+[node name="Info" type="Control" parent="Hud"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_ux0sm")
+
+[node name="Ammo" type="Label" parent="Hud/Info"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 384.0
+offset_right = 96.0
+offset_bottom = 410.0
+text = "Ammo"
+
+[node name="Sprite2D" type="Sprite2D" parent="Hud/Info/Ammo"]
+texture_filter = 1
+position = Vector2(-16, 8)
+scale = Vector2(2, 2)
+texture = ExtResource("8_hffn7")
+
+[node name="Health" type="Label" parent="Hud/Info"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 360.0
+offset_right = 72.0
+offset_bottom = 383.0
+text = "Hp"
+
+[node name="Sprite2D" type="Sprite2D" parent="Hud/Info/Health"]
+texture_filter = 1
+position = Vector2(-16, 8.00002)
+scale = Vector2(2, 2)
+texture = ExtResource("8_mfu6q")
+
+[node name="Score" type="Label" parent="Hud/Info"]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 8.0
+offset_right = 408.0
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("7_pkrmg")
+text = "Score"
+horizontal_alignment = 1
+
+[node name="Menu" type="Control" parent="Hud"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_qq8y5")
+
+[node name="Return Button" type="Button" parent="Hud/Menu"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 224.0
+offset_right = 448.0
+offset_bottom = 256.0
+text = "Return
+"
+
+[node name="Settings Button" type="Button" parent="Hud/Menu"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 448.0
+offset_bottom = 320.0
+text = "Settings"
+
+[node name="Main Menu Button" type="Button" parent="Hud/Menu"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 352.0
+offset_right = 408.0
+offset_bottom = 384.0
+text = "Main Menu"
+
+[node name="Arrow" parent="Hud/Menu" instance=ExtResource("9_ntnsa")]
+position = Vector2(464, 224)
+
+[node name="Settings" parent="Hud" instance=ExtResource("9_eocrs")]
+
+[node name="Death Menu" type="Control" parent="Hud"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_uxwpj")
+
+[node name="Score" type="Label" parent="Hud/Death Menu"]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 104.0
+offset_right = 616.0
+offset_bottom = 130.0
+text = "Score:"
+
+[node name="High Score" type="Label" parent="Hud/Death Menu"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 104.0
+offset_right = 320.0
+offset_bottom = 130.0
+text = "High Score:"
+
+[node name="Replay Button" type="Button" parent="Hud/Death Menu"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 224.0
+offset_right = 448.0
+offset_bottom = 256.0
+text = "Try again"
+
+[node name="Main Menu Button" type="Button" parent="Hud/Death Menu"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 448.0
+offset_bottom = 320.0
+text = "Main Menu"
+
+[node name="Arrow" parent="Hud/Death Menu" instance=ExtResource("9_ntnsa")]
+position = Vector2(464, 224)
+
+[node name="Start Timer" type="Timer" parent="."]
+process_mode = 3
+one_shot = true
+
+[node name="Music" parent="." instance=ExtResource("13_eqlol")]
+process_mode = 3
+
+[node name="Mini Tutorial" type="Node2D" parent="."]
+process_mode = 3
+script = ExtResource("14_cpwgg")
+
+[node name="Movement" type="Label" parent="Mini Tutorial"]
+texture_filter = 1
+offset_left = 296.0
+offset_top = 64.0
+offset_right = 440.0
+offset_bottom = 121.0
+text = "Movement:
+W
+ASD"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Mini Tutorial"]
+texture_filter = 1
+offset_left = 304.0
+offset_top = 280.0
+offset_right = 432.0
+offset_bottom = 318.0
+text = "Shoot:
+Spacebar"
+horizontal_alignment = 1
+
+[node name="Self Destruct Timer" type="Timer" parent="Mini Tutorial"]
+wait_time = 1.5
+autostart = true
+
+[node name="Upgrades" type="Node2D" parent="."]
+process_mode = 2
+visible = false
+position = Vector2(0, 32)
+script = ExtResource("17_ovsay")
+
+[node name="Option1" type="Sprite2D" parent="Upgrades"]
+self_modulate = Color(1, 1, 1, 0.639216)
+position = Vector2(200, 183.125)
+scale = Vector2(30.2222, 21.1389)
+texture = ExtResource("17_iu7ir")
+
+[node name="Button1" type="Button" parent="Upgrades/Option1"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -9.0
+offset_top = -4.5
+offset_bottom = 4.5
+grow_horizontal = 2
+disabled = true
+
+[node name="Option2" type="Sprite2D" parent="Upgrades"]
+self_modulate = Color(1, 1, 1, 0.639216)
+position = Vector2(520, 183.125)
+scale = Vector2(30.2222, 21.1389)
+texture = ExtResource("17_iu7ir")
+
+[node name="Button2" type="Button" parent="Upgrades/Option2"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -4.5
+offset_top = -4.5
+offset_right = 4.5
+offset_bottom = 4.5
+disabled = true
+
+[node name="Label1" type="RichTextLabel" parent="Upgrades"]
+texture_filter = 1
+offset_left = 71.9999
+offset_top = 95.1251
+offset_right = 328.0
+offset_bottom = 271.125
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "aaaaaaaaa=aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="RichTextLabel" parent="Upgrades"]
+texture_filter = 1
+offset_left = 392.0
+offset_top = 95.1251
+offset_right = 648.0
+offset_bottom = 271.125
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "aaaaaaaaa=aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Upgrades"]
+modulate = Color(1, 1, 1, 0.639216)
+position = Vector2(360, 32)
+scale = Vector2(23.1111, 4.94444)
+texture = ExtResource("17_iu7ir")
+
+[node name="Label" type="Label" parent="Upgrades"]
+texture_filter = 1
+offset_left = 256.0
+offset_top = 8.0
+offset_right = 464.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Choose one"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Upgrades"]
+visible = false
+
+[node name="Arrow" parent="Upgrades/CanvasLayer" instance=ExtResource("9_ntnsa")]
+position = Vector2(360, 336)
+rotation = 1.5708
+frame_progress = 0.0
+centered = true
+
+[node name="Shake Timer" type="Timer" parent="Upgrades"]
+one_shot = true
+
+[node name="Alert Sound" type="AudioStreamPlayer2D" parent="Upgrades"]
+stream = ExtResource("18_p2t6m")
+bus = &"Effects"
+
+[node name="Background" type="ParallaxBackground" parent="."]
+script = ExtResource("18_nin21")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Background"]
+texture_filter = 1
+motion_scale = Vector2(0.003, 0.003)
+motion_mirroring = Vector2(720, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxLayer"]
+z_index = -10
+texture_filter = 1
+position = Vector2(360, 202.5)
+scale = Vector2(0.375, 0.375926)
+texture = ExtResource("1_3xdx2")
+metadata/_edit_lock_ = true
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Background"]
+visible = false
+texture_filter = 1
+motion_scale = Vector2(0.001, 0.001)
+motion_mirroring = Vector2(800, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxLayer2"]
+modulate = Color(0.592157, 0.592157, 0.592157, 1)
+texture_filter = 1
+position = Vector2(648, 112)
+texture = ExtResource("20_3p0t3")
+
+[connection signal="area_entered" from="Trash Catcher" to="Trash Catcher" method="_on_area_entered"]
+[connection signal="body_entered" from="Trash Catcher" to="Trash Catcher" method="_on_body_entered"]
+[connection signal="timeout" from="Enemy Controller/Spawn_Timer" to="Enemy Controller" method="_on_spawn_timer_timeout"]
+[connection signal="child_exiting_tree" from="Enemy Controller/Enemy_List" to="Enemy Controller" method="_on_enemy_list_child_exiting_tree"]
+[connection signal="child_entered_tree" from="Enemy Controller/Sounds" to="Enemy Controller" method="_on_sounds_child_entered_tree"]
+[connection signal="mouse_entered" from="Hud/Menu/Return Button" to="Hud/Menu" method="_on_return_button_mouse_entered"]
+[connection signal="pressed" from="Hud/Menu/Return Button" to="Hud/Menu" method="_on_return_button_pressed"]
+[connection signal="mouse_entered" from="Hud/Menu/Settings Button" to="Hud/Menu" method="_on_settings_button_mouse_entered"]
+[connection signal="pressed" from="Hud/Menu/Settings Button" to="Hud/Menu" method="_on_settings_button_pressed"]
+[connection signal="mouse_entered" from="Hud/Menu/Main Menu Button" to="Hud/Menu" method="_on_main_menu_button_mouse_entered"]
+[connection signal="pressed" from="Hud/Menu/Main Menu Button" to="Hud/Menu" method="_on_main_menu_button_pressed"]
+[connection signal="visibility_changed" from="Hud/Death Menu" to="Hud/Death Menu" method="_on_visibility_changed"]
+[connection signal="mouse_entered" from="Hud/Death Menu/Replay Button" to="Hud/Death Menu" method="_on_replay_button_mouse_entered"]
+[connection signal="pressed" from="Hud/Death Menu/Replay Button" to="Hud/Death Menu" method="_on_replay_button_pressed"]
+[connection signal="mouse_entered" from="Hud/Death Menu/Main Menu Button" to="Hud/Death Menu" method="_on_main_menu_button_mouse_entered"]
+[connection signal="pressed" from="Hud/Death Menu/Main Menu Button" to="Hud/Death Menu" method="_on_menu_button_pressed"]
+[connection signal="timeout" from="Start Timer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="Mini Tutorial/Self Destruct Timer" to="Mini Tutorial" method="_on_self_destruct_timer_timeout"]
+[connection signal="pressed" from="Upgrades/Option1/Button1" to="Upgrades" method="_on_button_1_pressed"]
+[connection signal="pressed" from="Upgrades/Option2/Button2" to="Upgrades" method="_on_button_2_pressed"]
+[connection signal="timeout" from="Upgrades/Shake Timer" to="Upgrades" method="_on_shake_timer_timeout"]
+
+[editable path="Hud/Settings"]

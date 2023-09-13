@@ -1,0 +1,270 @@
+[gd_scene load_steps=21 format=3 uid="uid://bkoxskhssmvmm"]
+
+[ext_resource type="Script" path="res://Scripts/keybinds.gd" id="1_scgyd"]
+[ext_resource type="Texture2D" uid="uid://bmmb22x0ge02t" path="res://Assets/gamepad movement.png" id="2_v26ed"]
+[ext_resource type="Texture2D" uid="uid://dvsty4iayhjy4" path="res://Assets/gamepad movement 2.png" id="3_hud3h"]
+[ext_resource type="Texture2D" uid="uid://cnouwq7nljl3m" path="res://Assets/wasd.png" id="3_ma62j"]
+[ext_resource type="Texture2D" uid="uid://xodd6a428hlo" path="res://Assets/sageti.png" id="4_hcvp5"]
+[ext_resource type="Texture2D" uid="uid://icy76jux2erv" path="res://Assets/gamepad movement 5.png" id="4_vjm12"]
+[ext_resource type="Texture2D" uid="uid://bn8h2is66ybmm" path="res://Assets/esc.png" id="5_3fj6m"]
+[ext_resource type="Texture2D" uid="uid://bgy1qdn15dpy7" path="res://Assets/gamepad movement 3.png" id="5_3pufi"]
+[ext_resource type="Texture2D" uid="uid://dg565e53ig8tj" path="res://Assets/gamepad movement 4.png" id="6_6pjxq"]
+[ext_resource type="Texture2D" uid="uid://l8tedst0kmq5" path="res://Assets/gamepad esc.png" id="6_7hpyx"]
+[ext_resource type="Texture2D" uid="uid://duubdjkcfmp64" path="res://Assets/gamepad shoot.png" id="6_m5o06"]
+[ext_resource type="Texture2D" uid="uid://dqq3feerr0710" path="res://Assets/movement shoot 2.png" id="7_orque"]
+[ext_resource type="Texture2D" uid="uid://ddkwogu0g6a64" path="res://Assets/gamepad esc 2.png" id="7_qr8cw"]
+[ext_resource type="Texture2D" uid="uid://uckuifmb63rx" path="res://Assets/small arrow 1.png" id="9_d01js"]
+[ext_resource type="Texture2D" uid="uid://ckou8shvhis7i" path="res://Assets/keyboard shoot.png" id="14_tt5w3"]
+[ext_resource type="Texture2D" uid="uid://ddi4bywttls17" path="res://Assets/white square.png" id="15_0u12u"]
+[ext_resource type="PackedScene" uid="uid://lpks6u5yssay" path="res://Scenes/arrow.tscn" id="17_04bl3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ppexr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_v26ed")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hud3h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_v26ed")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vjm12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_v26ed")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3pufi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_v26ed")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6pjxq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w5lqo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_m5o06")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_orque")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5cysp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7hpyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7hpyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7hpyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_qr8cw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="Keybinds" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_scgyd")
+
+[node name="Label2" type="Label" parent="."]
+texture_filter = 1
+offset_left = 11.0
+offset_top = 207.0
+offset_right = 251.0
+offset_bottom = 226.0
+text = "Movement"
+
+[node name="GamepadMovement" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(587, 226)
+sprite_frames = SubResource("SpriteFrames_ppexr")
+autoplay = "default"
+frame_progress = 0.0889612
+
+[node name="GamepadShoot" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(495, 345)
+sprite_frames = SubResource("SpriteFrames_w5lqo")
+autoplay = "default"
+frame_progress = 0.616148
+
+[node name="Wasd" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(259, 223)
+texture = ExtResource("3_ma62j")
+
+[node name="Label" type="Label" parent="Wasd"]
+offset_left = -27.0
+offset_top = -38.0
+offset_right = 10.0
+offset_bottom = -1.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "W"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Wasd"]
+offset_left = -58.0
+offset_top = 1.0
+offset_right = -21.0
+offset_bottom = 38.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Wasd"]
+offset_left = -19.0
+offset_top = 1.0
+offset_right = 18.0
+offset_bottom = 38.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "S"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Wasd"]
+offset_left = 20.0
+offset_top = 1.0
+offset_right = 58.0
+offset_bottom = 38.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "D
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sageti" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(403, 223)
+texture = ExtResource("4_hcvp5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sageti"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-38.5, 20)
+scale = Vector2(3.88889, 2)
+texture = ExtResource("9_d01js")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Sageti"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-1, -17)
+rotation = 1.5708
+scale = Vector2(3.88889, 2)
+texture = ExtResource("9_d01js")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Sageti"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-1, 18)
+rotation = -1.5708
+scale = Vector2(3.88889, 2)
+texture = ExtResource("9_d01js")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sageti"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(37, 21)
+scale = Vector2(3.88889, 2)
+texture = ExtResource("9_d01js")
+flip_h = true
+
+[node name="Esc" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(339, 103)
+texture = ExtResource("5_3fj6m")
+
+[node name="Label2" type="Label" parent="Esc"]
+texture_filter = 1
+offset_left = -26.0
+offset_top = -25.0
+offset_right = 15.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "Esc"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = 11.0
+offset_top = 87.0
+offset_right = 251.0
+offset_bottom = 106.0
+text = "Open/Close menu"
+
+[node name="Label4" type="Label" parent="."]
+texture_filter = 1
+offset_left = 11.0
+offset_top = 327.0
+offset_right = 251.0
+offset_bottom = 346.0
+text = "Shoot/Select
+"
+
+[node name="GamepadEsc" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(483, 106)
+sprite_frames = SubResource("SpriteFrames_5cysp")
+autoplay = "default"
+frame_progress = 0.495197
+
+[node name="KeyboardShoot" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(311, 342)
+texture = ExtResource("14_tt5w3")
+
+[node name="Label" type="Label" parent="KeyboardShoot"]
+offset_left = -58.0
+offset_top = -23.0
+offset_right = 58.0
+offset_bottom = 14.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Space"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.0627451, 0.309804, 0.396078, 1)
+z_index = -10
+position = Vector2(360, 204)
+scale = Vector2(80, 45.3333)
+texture = ExtResource("15_0u12u")
+metadata/_edit_lock_ = true
+
+[node name="Button" type="Button" parent="."]
+texture_filter = 1
+offset_left = 600.0
+offset_top = 16.0
+offset_right = 704.0
+offset_bottom = 48.0
+text = "Back"
+
+[node name="Arrow" parent="." instance=ExtResource("17_04bl3")]
+position = Vector2(560, 19)
+frame_progress = 0.9146
+flip_h = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

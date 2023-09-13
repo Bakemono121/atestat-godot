@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://lpks6u5yssay"]
+
+[ext_resource type="Texture2D" uid="uid://uckuifmb63rx" path="res://Assets/small arrow 1.png" id="1_6prpk"]
+[ext_resource type="Texture2D" uid="uid://dkabghlimq1a6" path="res://Assets/small arrow 2.png" id="2_ivduo"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rccxx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6prpk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ivduo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Arrow" type="AnimatedSprite2D"]
+process_mode = 3
+texture_filter = 1
+position = Vector2(256, 164)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_rccxx")
+autoplay = "default"
+frame_progress = 0.266426
+speed_scale = 0.75
+centered = false
